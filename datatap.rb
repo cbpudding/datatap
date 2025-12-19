@@ -65,7 +65,11 @@ loop do
   items = []
 
   providers.each do |name, provider|
-    items.push *(provider.poll)
+    begin
+      items.push *(provider.poll)
+    rescue => e
+      puts "#{e}"
+    end
   end
 
   publish items unless items.empty?
