@@ -7,6 +7,7 @@ def scrape_html(uri)
   res = nil
   begin
     url = URI(location)
+    return meta if url.scheme != "https"
     Net::HTTP.start(url.host, url.port, use_ssl: true) do |http|
       req = Net::HTTP::Get.new url
       res = http.request req
